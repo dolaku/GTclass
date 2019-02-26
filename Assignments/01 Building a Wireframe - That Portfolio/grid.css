@@ -13,7 +13,7 @@ body {
     grid-template-areas:
         "header header header header header"
         "nav nav nav nav nav"
-        "section section section aside aside"
+        "container container container container container"
         "footer footer footer footer footer"
 }
 .bg-light-gray {
@@ -33,9 +33,19 @@ header {
 .nav {
     grid-area: nav;
 }
+.container {
+    grid-area: container;
+    margin: 10px 0;
+
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "section aside"
+
+}
 section {
     grid-area: section;
-    margin: 10px 0;
     padding: 30px 10px 10px;
 }
 article {
@@ -52,7 +62,6 @@ p {
 }
 aside {
     grid-area: aside;
-    margin: 10px 0 10px 10px;
     padding: 20px;
 }
 footer {
