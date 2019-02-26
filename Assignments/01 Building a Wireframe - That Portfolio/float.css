@@ -20,12 +20,17 @@ body {
 }
 .container {
     margin: 20px 0;
-    display: flex;
+}
+.container::after {
+    clear: both;
+    content: "";
+    display: block;
 }
 section {
+    float: left;
     margin-right: 20px;
     padding: 30px 10px 10px;
-    width: 65%;
+    width: 60%;
 }
 article {
     margin-top: 20px;
@@ -40,6 +45,22 @@ p {
     padding: 15px;
 }
 aside {
-    padding: 30px;
-    width: 35%;
+    float: right;
+    height: 221px;
+    padding: 20px;
+    width: 30%;
+}
+
+@media only screen and (max-width: 1080px) {
+    section {
+        width: 55%;
+    }
+}
+@media only screen and (max-width: 730px) {
+    section {
+        width: 50%;
+    }
+    aside {
+        width: 25%;
+    }
 }
