@@ -1,0 +1,20 @@
+/**
+ * Google Fonts Demo
+ **/
+
+/* Add in the Google Fonts of your choice */
+h1, h2, h3, h4 {
+    font-family: 'Pacifico', cursive;
+}
+
+p {
+    font-family: 'Laila', serif;
+}
+.fa-id-badge {
+    color: #4aaaa4;
+    font-size: 2em;
+}
+body {
+    margin: 0 auto;
+    max-width: 85%;
+}

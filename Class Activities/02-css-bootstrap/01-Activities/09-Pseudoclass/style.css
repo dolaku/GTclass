@@ -1,0 +1,35 @@
+body {
+    margin: 10% auto;
+    text-align: center;
+}
+a {
+    border: #ccc solid 1px;
+    padding: 50px;
+    margin: 10px;
+    background-color: cadetblue;
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em;
+}
+a:hover {
+    background-color: darkmagenta;
+    transition: .5s;
+}
+a:active {
+    padding: 70px;
+}
+.c:active {
+    content: "Where???";
+}
+.d:hover {
+    background-color: blanchedalmond;
+    opacity: .6;
+    color: #777;
+    transition: 1s;
+    padding: 30px;
+    font-size: .8em;
+    border-radius: 50%;
+}
+.d:active {
+    display: none;
+}
