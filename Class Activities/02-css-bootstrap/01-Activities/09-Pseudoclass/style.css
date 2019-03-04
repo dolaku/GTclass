@@ -16,10 +16,7 @@ a:hover {
     transition: .5s;
 }
 a:active {
-    padding: 70px;
-}
-.c:active {
-    content: "Where???";
+    padding: 80px;
 }
 .d:hover {
     background-color: blanchedalmond;
