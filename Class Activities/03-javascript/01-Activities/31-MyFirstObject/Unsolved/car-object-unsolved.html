@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>My First Object</title>
+  </head>
+
+  <style>
+  .highlight {
+    color: #4ba8ff;
+  }
+  #warning {
+    color: #dd1919;
+  }
+  </style>
+
+  <body>
+    <center>
+      <h2>Press <span class="highlight">h</span> to honk.</h2>
+      <h2>Press <span class="highlight">d</span> to drive to work.</h2>
+      <h2>Press <span class="highlight">w</span> to drive around the world.</h2>
+      <h2>Press <span class="highlight">t</span> for a tune up.</h2>
+      <br>
+      <h3>You pressed: <span id="keyPressed" class="highlight"></span></h3>
+      <br>
+      <h4><span id="output"></span></h4>
+      <h4><span id="warning"></span></h4>
+    </center>
+
+    
+
+
+
+    <script>
+      var keyPressed = document.getElementById('keyPressed');
+      var output = document.getElementById('output');
+      var warning = document.getElementById('warning');
+
+      document.onkeyup = function(event) {
+        keyPressed.textContent = event.key;
+
+        if (event.key === 'h') {
+          car.honk();
+          warning.textContent = "";
+
+        } else if (event.key === 'd') {
+          car.driveToWork();
+          output.textContent = "You've driven " + car.mileage + " miles.";
+          warning.textContent = "";
+          
+          if (car.mileage >= 27000) {
+            warning.textContent = "You need to get a tune up!";
+          }
+
+        } else if (event.key === 'w') {
+          car.driveAroundWorld();
+          output.textContent = "You've driven " + car.mileage + " miles.";
+          warning.textContent = "";
+          
+          if (car.mileage >= 27000) {
+            warning.textContent = "You need to get a tune up!";
+          }
+
+        } else if (event.key === 't') {
+          car.getTuneUp();
+          car.mileage = 3000;
+          warning.textContent = "Car is ready to roll!";
+        }
+      };
+
+      var car = {
+        make: "Honda",
+        model: "Fit",
+        color: "Blue Raspberry",
+        mileage: 3000,
+        isWorking: true,
+
+        driveToWork: function() {
+
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 8;
+
+          alert("New mileage: " + this.mileage);
+        },
+
+        driveAroundWorld: function() {
+
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 24000;
+
+          alert("New Mileage: " + this.mileage);
+          alert("Car needs a tuneup!");
+
+          this.isWorking = false;
+        },
+
+        getTuneUp: function() {
+          alert("Car is ready to go!");
+          this.isWorking = true;
+        },
+
+        honk: function() {
+          alert("Honk! Honk!");
+        }
+      };
+
+
+      /* // How would we log...
+
+      // The car's make?
+      console.log(car.make);
+      // The car's model?
+      console.log(car.model);
+      // The car's mileage?
+      console.log(car["mileage"]);
+      // How would we run the car's driveToWork method?
+      car.driveToWork();
+      // How would we run the car's driveAroundWorld method?
+      car.driveAroundWorld();
+      // How would we run the getTuneUp method?
+      car.getTuneUp();
+
+      car.honk();
+       */
+    </script>
+    
+  </body>
+</html>
