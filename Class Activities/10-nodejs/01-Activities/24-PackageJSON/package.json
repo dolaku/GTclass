@@ -1,0 +1,15 @@
+{
+  "name": "weatherdest",
+  "version": "1.0.0",
+  "description": "This app will gather weather data and address info for any landmark or location.",
+  "main": "weatherdest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-geocoder": "^3.22.0",
+    "weather-js": "^2.0.0"
+  }
+}

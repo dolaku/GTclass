@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NYT API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row" id="form-search">
+            <div class="col-md-6 mx-auto">
+                <h1>Search parameters</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="searchTerm">Search Term</label>
+                        <input type="string" class="form-control" id="searchTerm">
+                    </div>
+                    <div class="numerOfArts">
+                        <label for="numberArts">Number of articles to retrieve</label>
+                        <select class="form-control" id="numberArts">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option selected>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="form-group w-50 float-left">
+                                <label for="startYear">Start year (optional)</label>
+                                <input type="string" class="form-control w-75" id="startYear">
+                            </div>
+                            <div class="form-group w-50 float-left">
+                                <label for="endYear">End year (optional)</label>
+                                <input type="string" class="form-control w-75" id="endYear">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+        <!--End row#form-search-->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="my-5">
+                    <div class="card">
+                        <h3 class="card-header">
+                            Articles
+                        </h3>
+                        <div class="card-body" id="display-news">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div> <!-- End container-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $("#submit-btn").on("click", function (e) {
+            // stops submit from refreshing page
+            e.preventDefault();
+
+            // retrieve form values
+            var searchTerm = $('#searchTerm').val().trim();
+            var numberArts = $('#numberArts').val();
+            var startYear = $('#startYear').val().trim();
+            var endYear = $('#endYear').val().trim();
+
+            // https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=mq7cDxjRGOSpTGcRLQYjwQvOfROSCE4O
+            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+                searchTerm + "&api-key=mq7cDxjRGOSpTGcRLQYjwQvOfROSCE4O";
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (data) {
+                console.log(data);
+                var results = data.response;
+
+
+                for ( var i = 0; i < numberArts; i++) {
+                    var docs = results.docs[i];
+                    var headline = docs.headline.main;
+                    var pubDate = docs.pub_date;
+                    var snippet = docs.snippet;
+                    var url = docs.web_url;
+
+                    // get publication year
+                    var newDate = new Date(pubDate);
+                    var strDate = JSON.stringify(newDate);
+                    var pubYear = parseInt(strDate.substring(1, 5));
+
+
+                    // if (startYear <= pubYear && endYear >= pubYear) {
+                        // Use of template literal to create HTML elements dynamically
+                        // Variables placed into corresponding elements
+                        $('#display-news').append(`
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${headline}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${newDate}</h6>
+                                    <p class="card-text">${snippet}</p>
+                                    <a class="card-link" href="${url}" target="_blank" rel="noopener noreferrer">Read More!</a>
+                                </div>
+                            </div>
+                        `);
+
+                    // }
+
+
+                }
+
+
+            })
+        });
+    </script>
+
+</body>
+
+</html>
