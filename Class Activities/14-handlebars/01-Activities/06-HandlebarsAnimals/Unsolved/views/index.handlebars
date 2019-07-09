@@ -1,0 +1,19 @@
+<!-- 5. Output the animalType string, pet boolean, and fierceness number to the page for all the pets. -->
+<style media="screen">
+  li {
+    background-color: wheat;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 50%;
+    font-family: sans-serif;
+  }
+</style>
+
+
+<h1>Animals</h1>
+<ul>
+    {{!-- array of objects --}}
+{{#each animals}}
+    <li>{{animalType}} -- {{pet}} -- fierceness: {{fierceness}}</li>
+{{/each}}
+</ul>
